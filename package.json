@@ -1,14 +1,17 @@
 {
-  "name": "management",
+  "name": "customer-management",
   "version": "1.0.0",
-  "scrpits": {
+  "private": true,
+  "scripts": {
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \" yarn server\" \"yarn client\""
   },
   "dependencies": {
+    "axios": "^0.26.0",
     "body-parser": "^1.19.1",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "http-proxy-middleware": "^2.0.3"
   },
   "devDependencies": {
     "concurrently": "^7.0.0"
