@@ -11,7 +11,10 @@
     "axios": "^0.26.0",
     "body-parser": "^1.19.1",
     "express": "^4.17.2",
-    "http-proxy-middleware": "^2.0.3"
+    "http-proxy-middleware": "^2.0.3",
+    "mysql": "^2.18.1",
+    "react": "^17.0.2",
+    "yarn": "^1.22.17"
   },
   "devDependencies": {
     "concurrently": "^7.0.0"
