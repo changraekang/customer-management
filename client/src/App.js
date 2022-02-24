@@ -1,28 +1,33 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Customer from "./components/Customer";
+import CustomerAdd from "./components/CustomerAdd";
 import "./App.css";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
+import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
+import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import { withStyles } from "@material-ui/core/styles";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const styles = (theme) => ({
+const useStyles = makeStyles({
   root: {
     width: "100%",
-    marginTop: theme.spacing.unit * 3,
     overflowX: "auto",
   },
   table: {
-    minwidth: 1000,
+    minWidth: 1080,
+  },
+  progress: {
+    margin: 10,
   },
 });
 
 function App() {
+  const classes = useStyles();
   const [customers, setCustomers] = useState([]);
   const [progress, setProgress] = useState(0);
 
@@ -47,49 +52,52 @@ function App() {
   };
 
   return (
-    <Paper className={styles.root}>
-      <Table className={styles.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>번호</TableCell>
-            <TableCell>이미지</TableCell>
-            <TableCell>이름</TableCell>
-            <TableCell>생년월일</TableCell>
-            <TableCell>성별</TableCell>
-            <TableCell>직업</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {customers != 0 ? (
-            customers.map((c) => {
-              return (
-                <Customer
-                  key={c.id}
-                  id={c.id}
-                  image={c.image}
-                  name={c.NAME}
-                  birthday={c.birthday}
-                  gender={c.gender}
-                  job={c.job}
-                  stateRefresh={stateRefresh}
-                />
-              );
-            })
-          ) : (
+    <TableContainer component={Paper}>
+      <Paper className={classes.root}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
             <TableRow>
-              <TableCell colSpan="6" align="center">
-                <CircularProgress
-                  className={progress}
-                  variant="determinate"
-                  value={progress}
-                />
-              </TableCell>
+              <TableCell>id</TableCell>
+              <TableCell>image</TableCell>
+              <TableCell>name</TableCell>
+              <TableCell>birthday</TableCell>
+              <TableCell>gender</TableCell>
+              <TableCell>job</TableCell>
+              <TableCell>setting</TableCell>
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </Paper>
+          </TableHead>
+          <TableBody>
+            {customers != 0 ? (
+              customers.map((c) => {
+                return (
+                  <Customer
+                    key={c.id}
+                    id={c.id}
+                    image={c.image}
+                    name={c.NAME}
+                    birthday={c.birthday}
+                    gender={c.gender}
+                    job={c.job}
+                    stateRefresh={stateRefresh}
+                  />
+                );
+              })
+            ) : (
+              <TableRow>
+                <TableCell colSpan="6" align="center">
+                  <CircularProgress
+                    className={progress}
+                    variant="determinate"
+                    value={progress}
+                  />
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </Paper>
+      <CustomerAdd stateRefresh={stateRefresh} />
+    </TableContainer>
   );
 }
-
-export default withStyles(styles)(App);
+export default App;
