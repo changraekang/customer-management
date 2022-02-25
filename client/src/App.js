@@ -67,7 +67,7 @@ function App() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {customers != 0 ? (
+            {customers !== 0 ? (
               customers.map((c) => {
                 return (
                   <Customer
