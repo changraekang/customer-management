@@ -18,7 +18,7 @@ function CustomerAdd(props) {
   const [info, setInfo] = useState([
     {
       file: null,
-      useName: "",
+      userName: "",
       birthday: "",
       gender: "",
       job: "",
@@ -26,7 +26,6 @@ function CustomerAdd(props) {
       open: false,
     },
   ]);
-
   const { file, userName, birthday, gender, job, fileName } = info;
 
   function addCustomer() {
@@ -55,7 +54,7 @@ function CustomerAdd(props) {
       .catch((err) => console.log(err));
     setInfo({
       file: null,
-      useName: "",
+      userName: "",
       birthday: "",
       gender: "",
       job: "",
@@ -67,14 +66,20 @@ function CustomerAdd(props) {
 
   function handleFileChange(e) {
     const { name, value } = e.target;
-    setInfo({
-      ...info,
-      [name]: e.target.files[0],
-      [fileName]: value,
-    });
+    let newInfo = [{ ...info }];
+    newInfo = { ...info, file: e.target.files[0], fileName: e.target.value };
+    setInfo(newInfo);
+    console.log("name");
+    console.log(name);
+    console.log("value");
 
-    console.log(name, value);
+    console.log(value);
+    console.log("new");
+    console.log(newInfo);
+    console.log("타겟");
     console.log(e.target.files[0]);
+    console.log("info");
+    console.log(info);
   }
 
   function handleValueChange(e) {
@@ -83,16 +88,26 @@ function CustomerAdd(props) {
       ...info,
       [name]: value,
     });
+    console.log(info);
   }
 
   const handleClickOpen = () => {
-    setInfo({ open: true });
+    setInfo({
+      file: null,
+      userName: "",
+      birthday: "",
+      gender: "",
+      job: "",
+      fileName: "",
+      open: true,
+    });
+    console.log(info.open + "인포");
   };
 
   const handleClose = () => {
     setInfo({
       file: null,
-      useName: "",
+      userName: "",
       birthday: "",
       gender: "",
       job: "",
@@ -128,9 +143,8 @@ function CustomerAdd(props) {
               component="span"
               name="file"
             >
-              {" "}
-              프로필
-              {info.fileName === "" ? "프로필 이미지 선택" : info.fileName}
+              {info.fileName}
+              {info.fileName === "" ? "고객 프로필 추가" : info.fileName}
             </Button>
           </label>
           <br />
@@ -180,7 +194,7 @@ function CustomerAdd(props) {
           </Button>
         </DialogActions>
       </Dialog>
-      <form onSubmit={handleFormSubmit}>
+      {/* <form onSubmit={handleFormSubmit}>
         <h1>고객 추가</h1>
         프로필 이미지 :{" "}
         <input
@@ -224,7 +238,7 @@ function CustomerAdd(props) {
         />
         <br />
         <button type="submit">추가하기</button>
-      </form>
+      </form> */}
     </div>
     /*
      */
