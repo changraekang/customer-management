@@ -7,10 +7,17 @@ import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
 
 const styles = (theme) => ({
   hidden: {
     display: "none",
+  },
+  formControl: {
+    minWidth: 200,
   },
 });
 
@@ -143,7 +150,6 @@ function CustomerAdd(props) {
               component="span"
               name="file"
             >
-              {info.fileName}
               {info.fileName === "" ? "고객 프로필 추가" : info.fileName}
             </Button>
           </label>
@@ -164,13 +170,24 @@ function CustomerAdd(props) {
             onChange={handleValueChange}
           />
           <br />
-          <TextField
-            label="성별"
-            type="text"
-            name="gender"
-            value={gender}
-            onChange={handleValueChange}
-          />
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-standard-label">성별</InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              name="gender"
+              value={gender}
+              onChange={handleValueChange}
+              label="gender"
+              minWidth="300px"
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+            </Select>
+          </FormControl>
           <br />
           <TextField
             label="직업"
